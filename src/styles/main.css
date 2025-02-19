@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
 
 * {
     margin: 0;
@@ -9,9 +11,14 @@ body {
     height: 100vh;
     width: 100%;
 
+    background-color: #f4f4f4;
+
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 4fr;
     grid-template-rows: 1fr;
+
+    font-family: "Lexend", serif;
+
     overflow: hidden;
 
 }
@@ -25,9 +32,78 @@ ul{
     grid-column: 1/2;
     grid-row: 1/2;
 
-    font-size: 20px;
-
     padding: 1em;
-    background-color: aqua;
 
+    font-size: 18px;
+
+    color: #585858;
+    background-color: #f4f4f4;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+}
+
+.search input {
+    height: 25px;
+    border-radius: 1em;
+    background-color: #dfdfdf;
+    font-family: "Lexend", sans-serif;
+    text-align: center;
+    font-size: 15px;
+}
+
+.task-bar { 
+    display: flex;
+    flex-direction: column;
+    gap: 4px;    
+}
+
+.task-bar li {
+
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    font-weight: 540;
+    border-radius: 4px;
+    height: 35px;
+}
+
+.sidebar ul li:hover {
+    background-color: #dfdfdf;
+}
+
+.main-content {
+    border-radius: 2em;
+    background-color: white;
+    margin: 15px;
+
+    padding: 3em;
+    box-shadow: -1px 0px 5px rgba(0, 0, 0, 0.352);
+
+
+    overflow: hidden;
+}
+
+.today-tasks {
+    background-color: #f4f4f4;
+}
+
+.today-tasks ul {
+
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.card {
+    scrollbar-width: none;
+    overflow-y: scroll;
+    height: 100vh;
+    padding: 20px;
+}
+
+.label{
+    cursor: pointer;
 }
