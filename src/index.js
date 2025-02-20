@@ -1,4 +1,2 @@
 import "./styles/main.css"
-
-
-document.getElementById
+import "./styles/today.css"

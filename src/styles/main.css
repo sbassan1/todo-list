@@ -54,14 +54,13 @@ ul{
     font-size: 15px;
 }
 
-.task-bar { 
+.option-bars { 
     display: flex;
     flex-direction: column;
     gap: 4px;    
 }
 
-.task-bar li {
-
+.option-bars li {
     display: flex;
     align-items: center;
     padding: 2px;
@@ -74,36 +73,5 @@ ul{
     background-color: #dfdfdf;
 }
 
-.main-content {
-    border-radius: 2em;
-    background-color: white;
-    margin: 15px;
+/* THIS IS WHERE THE TODAY SUBPAGE START */
 
-    padding: 3em;
-    box-shadow: -1px 0px 5px rgba(0, 0, 0, 0.352);
-
-
-    overflow: hidden;
-}
-
-.today-tasks {
-    background-color: #f4f4f4;
-}
-
-.today-tasks ul {
-
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.card {
-    scrollbar-width: none;
-    overflow-y: scroll;
-    height: 100vh;
-    padding: 20px;
-}
-
-.label{
-    cursor: pointer;
-}

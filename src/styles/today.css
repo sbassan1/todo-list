@@ -1,0 +1,28 @@
+
+
+.main-content {
+    border-radius: 2em;
+    background-color: white;
+    margin: 15px;
+
+    padding: 3em;
+    box-shadow: -1px 0px 5px rgba(0, 0, 0, 0.352);
+
+    overflow: hidden;
+}
+
+.today-tasks {
+    background-color: #f4f4f4;
+}
+
+.today-tasks ul {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px;
+}
+
+.task-header {
+    display: flex;
+    gap: 5px;
+}
