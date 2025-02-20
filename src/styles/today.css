@@ -8,21 +8,46 @@
     padding: 3em;
     box-shadow: -1px 0px 5px rgba(0, 0, 0, 0.352);
 
-    overflow: hidden;
 }
 
-.today-tasks {
-    background-color: #f4f4f4;
-}
+.tasks-box {
+    /* background-color: aquamarine; */
+    padding: 15px;
 
-.today-tasks ul {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    padding: 10px;
+    gap: 10px;
+
 }
 
-.task-header {
-    display: flex;
-    gap: 5px;
+.task {
+    background-color: #dfdfdf;
+    padding: 5px;
+    border-radius: 6px;
+
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+    gap: 10px;
 }
+
+#task-description {
+    padding-left: 5px;
+}
+
+#due-date {
+    padding: 3px;
+    background-color: brown;
+    border-radius: 10px;
+
+}
+
+.checklist{
+    padding: 10px;
+    /* background-color: cadetblue; */
+}
+
+.task ul{
+    list-style-type: disc;
+    padding-left: 20px;
+}
+

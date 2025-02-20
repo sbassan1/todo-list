@@ -19,8 +19,7 @@ body {
 
     font-family: "Lexend", serif;
 
-    overflow: hidden;
-
+    overflow: auto;
 }
 
 ul{
