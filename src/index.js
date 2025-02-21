@@ -7,12 +7,31 @@ let user_tasks = []; // Stores ALL tasks of the user, including completed ones.
 class task { // The checklist should be [] when created.
 
     constructor(task_name, task_description = "", task_due_date, task_priority = "low", checklist =[]) {
-        this.task_name = task_name; // Required, less than 20 characters, tasks should have unique names.
-        this.task_description = task_description; // Optional, less than 50 characters. Empty string by default.
-        this.task_due_date = task_due_date; // Format: "YYYY-MM-DD"
-        this.task_priority = task_priority; // "low", "medium", "high". Set to "low" by default.
-        this.task_status = "incomplete";   // "incomplete" or "complete"
-        this.checklist = checklist; // Array of strings to be checked off. Set to [] by dafault
+
+        if (!task_name || typeof task_name !== "string" || task_name.length >= 20) {
+            throw new Error("task_name is required and must be less than 20 characters.");
+        }
+
+        if (task_description && (typeof task_description !== "string" || task_description.length >= 50)) {
+            throw new Error("task_description must be less than 50 characters.");
+        }
+
+        const validPriorities = ["low", "medium", "high"];
+        if (!validPriorities.includes(task_priority)) {
+            throw new Error("task_priority must be 'low', 'medium', or 'high'.");
+        }
+
+        if (!Array.isArray(checklist) || !checklist.every(item => typeof item === "string")) {
+            throw new Error("checklist must be an array of strings.");
+        }
+        
+
+        this.task_name = task_name;                 // Required, less than 20 characters, tasks should have unique names.
+        this.task_description = task_description;   // Optional, less than 50 characters. Empty string by default.
+        this.task_due_date = task_due_date;         // Format: "YYYY-MM-DD"
+        this.task_priority = task_priority;         // "low", "medium", "high". Set to "low" by default.
+        this.task_status = "incomplete";            // "incomplete" or "complete"
+        this.checklist = checklist;                 // Array of strings to be checked off. Set to [] by dafault
     }
 
 }
