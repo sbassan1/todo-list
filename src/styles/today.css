@@ -1,35 +1,4 @@
 
-
-.main-content {
-    border-radius: 2em;
-    background-color: white;
-    margin: 15px;
-
-    padding: 3em;
-    box-shadow: -1px 0px 5px rgba(0, 0, 0, 0.352);
-
-}
-
-.header-content {
-    display: grid;
-    grid-template-columns: 9fr 1fr;
-    grid-row: 1fr 1fr;
-}
-
-.priority {
-    grid-row: 2/3;
-}
-
-#today {
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
-#create-task {
-    height: 30px;
-}
-
-
 .tasks-box {
     /* background-color: aquamarine; */
     padding: 15px;
@@ -61,12 +30,10 @@
 
 }
 
-.checklist{
-    /* background-color: cadetblue; */
-}
-
 .task ul{
     list-style-type: disc;
     padding-left: 20px;
 }
+
+
 

@@ -9,7 +9,7 @@ class Task { // The validation logic is moved to the Task class instead of the m
       return ++Task.idCounter;
     }
   
-    // The task name, due date, and priority are required, all others are optional
+    // The task name, due date, all others are optional
     constructor(task_name, task_due_date, task_description = "", task_priority = "low", checklist = [], id = null) {
       if (!task_name || typeof task_name !== "string" || task_name.length > 20) {
         throw new Error("task_name is required and must be a string less than 20 characters.");
@@ -52,10 +52,9 @@ class Task { // The validation logic is moved to the Task class instead of the m
       }
       this.checklist = newChecklist;
     }
-  }
+}
   
-  
-  class TaskManager {
+class TaskManager {
     constructor() {
       this.user_tasks = [];
     }
@@ -165,5 +164,4 @@ class Task { // The validation logic is moved to the Task class instead of the m
         console.error(error.message);
       }
     }
-  }
-  
+}
