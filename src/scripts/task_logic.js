@@ -165,28 +165,65 @@ export class TaskManager {
     }
 }
 
+class TaskCardUI {
+
+  constructor(task) {
+    this.task = task;
+  }
+
+  render(){
+    const taskContainer = document.createElement('div');
+    taskContainer.className = "task";
+
+    const taskTitle = document.createElement('div');
+    taskTitle.id = "task-title";
+    taskTitle.textContent = this.task.task_name;
+
+    const taskDueDate = document.createElement('span');
+    taskDueDate.id = "due-date";
+    taskDueDate.textContent = "Due date: " + this.task.task_due_date;
+
+    const taskDescription = document.createElement('p');
+    taskDescription.id = "task-description"; 
+    taskDescription.textContent = this.task.task_description;
+
+    const taskOptions = document.createElement('div');
+    taskOptions.className = "task-options";
+
+    const taskDeleteBtn = document.createElement('button');
+    taskDeleteBtn.className = "delete-task"
+    const taskEditBtn = document.createElement('button');
+    taskEditBtn.className = "edit-task";
 
 
+    const taskChecklist = document.createElement('ul');
+    taskChecklist.className = "task-checklist";
 
-/* 
-            <div class="task">
+    const checklistAdd = document.createElement('div');
+    checklistAdd.className = "task-checklist-div";
 
-                <div class="task-head">
-                    <h4 id="task-title">Task Title that summarices it <span id="due-date">Due date: 29/2/2025</span>  </h4>  
-                    <p id="task-description">Brief description of the tasks at hand</p>     
-                </div>
+    const newElementList = document.createElement('input');
+    newElementList.type = "text";
+    newElementList.id = "new-element";
+    newElementList.placeholder = "Add a new task! ";
 
-                <div class="task-options">
-                    <button id="delete-task">Delete</button>
-                    <button id="edit">Edit</button>
-                </div>
+    const submitNewElementList = document.createElement('button');
+    submitNewElementList.id = "add-element-btn";
 
-                <div class="checklist">
-                    <ul>
-                        <li>
-                        </li>
-                    </ul>
-                </div>
+    taskChecklist.appendChild(newElementList , submitNewElementList);
 
-            </div>
-*/
+    taskOptions.appendChild(taskDeleteBtn, taskEditBtn);
+
+    taskContainer.appendChild(taskTitle,taskDescription,taskOptions,taskChecklist);
+
+    return taskContainer;
+  }
+
+}
+
+class TaskChecklistManager {
+
+    constructor (card) {
+      this.card = card;
+    }
+}
