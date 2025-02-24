@@ -1,4 +1,4 @@
-import plusIcon from '../svg/plus.svg';  
+import plusIcon from '../svg/plus.svg';
 
 export class MainContentBase {
 
@@ -23,16 +23,16 @@ export class MainContentBase {
                 `;
         
         const addTaskBtn = document.createElement('img');
-        
         addTaskBtn.src = plusIcon;
         addTaskBtn.alt = "Add Task";
         addTaskBtn.id = "btn-add-task";
-        //addTaskBtn.addEventListener("click", openForm());
+        addTaskBtn.addEventListener("click", () => {
+            document.getElementById("myForm").style.display = "block";
+        });
 
         const tasksContent = document.createElement('div');
         tasksContent.className = "tasks-box";
-        
-        
+                
         headerContent.appendChild(titlePage);
         headerContent.appendChild(priority);
         headerContent.appendChild(addTaskBtn);
