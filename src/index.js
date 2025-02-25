@@ -1,5 +1,6 @@
 import "./styles/main.css"
 import "./styles/today.css"
+import "./styles/task_form.css"
 import {MainContentBase} from "./scripts/base_content_task.js";
 import {TodayPage} from "./scripts/today_tasks.js";
 import {TaskFormUI, user_tasks} from "./scripts/task_creation.js";

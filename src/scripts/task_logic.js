@@ -220,10 +220,3 @@ class TaskCardUI {
   }
 
 }
-
-class TaskChecklistManager {
-
-    constructor (card) {
-      this.card = card;
-    }
-}

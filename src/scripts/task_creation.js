@@ -49,27 +49,30 @@ export class TaskFormUI {
         dateInput.type = "date";
         dateInput.name = "due-date";
 
-        const fieldset = document.createElement("fieldset");
-        const legend = document.createElement("legend");
-        legend.textContent = "Priority:";
-        fieldset.appendChild(legend);
+        const priorityDiv = document.createElement("div");
 
-        const priorities = [
-            { value: "low", label: "🟢 Low" },
-            { value: "medium", label: "🟡 Medium" },
-            { value: "high", label: "🔴 High" }
-        ];
+        const priorityLabel = document.createElement("label");
+        priorityLabel.for = "priority-select";
+        priorityLabel.textContent = "Priority:";
 
-        priorities.forEach(priority => {
-            const label = document.createElement("label");
-            const radio = document.createElement("input");
-            radio.type = "radio";
-            radio.name = "priority";
-            radio.value = priority.value;
-            label.appendChild(radio);
-            label.append(` ${priority.label}`);
-            fieldset.appendChild(label);
-        });
+        const prioritySelector = document.createElement("select");
+        prioritySelector.name = "priority";
+        prioritySelector.id = "priority-select";
+
+        const lowPriorityOp = document.createElement('option');
+        lowPriorityOp.textContent = "🟢 low";
+        lowPriorityOp.value = "low";
+
+        const mediumPriorityOp = document.createElement('option');
+        mediumPriorityOp.textContent = "🟡 medium";
+        mediumPriorityOp.value = "medium";
+
+        const highPriorityOp = document.createElement('option');
+        highPriorityOp.textContent = "🔴 high";
+        highPriorityOp.value = "high"
+
+        prioritySelector.append(lowPriorityOp, mediumPriorityOp , highPriorityOp);
+        priorityDiv.appendChild(prioritySelector);
 
         const submitButton = document.createElement("button");
         submitButton.type = "submit";
@@ -90,7 +93,7 @@ export class TaskFormUI {
             title, nameLabel, nameInput,
             descLabel, descInput,
             dateLabel, dateInput,
-            fieldset, submitButton,
+            priorityDiv, submitButton,
             resetButton, closeButton
         );
 
@@ -102,9 +105,8 @@ export class TaskFormUI {
             const formData = {
                 name: nameInput.value.trim(),
                 description: descInput.value.trim(),
-                dueDate: format(dateInput.value, 'dd-MM-yyyy'),
-                priority: [...fieldset.querySelectorAll("input[name='priority']")]
-                    .find(input => input.checked)?.value || "low"
+                dueDate: format(dateInput.value, 'dd-MM-yyyy'), // default format for date input is YYYY-MM-dd
+                priority: prioritySelector.value || "low"
             };
 
             this.onSubmit?.(formData);
