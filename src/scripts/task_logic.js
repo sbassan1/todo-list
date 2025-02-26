@@ -1,6 +1,7 @@
+// THIS FILE CONTAINS THE CLASSES FOR LOGIC OF TASKS AND EDITING TASKS IN CONSOLE
 
 
-export class Task { // The validation logic is moved to the Task class instead of the manager of the tasks
+export class Task {
 
     static idCounter = 0;
   
@@ -163,60 +164,4 @@ export class TaskManager {
         console.error(error.message);
       }
     }
-}
-
-class TaskCardUI {
-
-  constructor(task) {
-    this.task = task;
-  }
-
-  render(){
-    const taskContainer = document.createElement('div');
-    taskContainer.className = "task";
-
-    const taskTitle = document.createElement('div');
-    taskTitle.id = "task-title";
-    taskTitle.textContent = this.task.task_name;
-
-    const taskDueDate = document.createElement('span');
-    taskDueDate.id = "due-date";
-    taskDueDate.textContent = "Due date: " + this.task.task_due_date;
-
-    const taskDescription = document.createElement('p');
-    taskDescription.id = "task-description"; 
-    taskDescription.textContent = this.task.task_description;
-
-    const taskOptions = document.createElement('div');
-    taskOptions.className = "task-options";
-
-    const taskDeleteBtn = document.createElement('button');
-    taskDeleteBtn.className = "delete-task"
-    const taskEditBtn = document.createElement('button');
-    taskEditBtn.className = "edit-task";
-
-
-    const taskChecklist = document.createElement('ul');
-    taskChecklist.className = "task-checklist";
-
-    const checklistAdd = document.createElement('div');
-    checklistAdd.className = "task-checklist-div";
-
-    const newElementList = document.createElement('input');
-    newElementList.type = "text";
-    newElementList.id = "new-element";
-    newElementList.placeholder = "Add a new task! ";
-
-    const submitNewElementList = document.createElement('button');
-    submitNewElementList.id = "add-element-btn";
-
-    taskChecklist.appendChild(newElementList , submitNewElementList);
-
-    taskOptions.appendChild(taskDeleteBtn, taskEditBtn);
-
-    taskContainer.appendChild(taskTitle,taskDescription,taskOptions,taskChecklist);
-
-    return taskContainer;
-  }
-
 }

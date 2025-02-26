@@ -3,14 +3,14 @@ import "./styles/today.css"
 import "./styles/task_form.css"
 import {MainContentBase} from "./scripts/base_content_task.js";
 import {TodayPage} from "./scripts/today_tasks.js";
-import {TaskFormUI, user_tasks} from "./scripts/task_creation.js";
+import {TaskFormUI} from "./scripts/task_creation.js";
 
 const content = document.getElementsByClassName('main-content')[0];
 const todayBtn = document.getElementsByClassName('today-button')[0];
 
 
 const mainContent = new MainContentBase();
-const todayContent = new TodayPage();
+export const todayContent = new TodayPage();
 
 
 const taskForm = new TaskFormUI(); // The taskData is the inputs of the form submitted by the user.

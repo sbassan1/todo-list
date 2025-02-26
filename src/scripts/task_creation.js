@@ -1,8 +1,13 @@
 import { Task , TaskManager } from "./task_logic.js";
-import {format} from "date-fns";
+import {format, parse, isWithinInterval, startOfWeek, endOfWeek} from "date-fns";
+import {todayContent} from "../index.js"
 
+let today = new Date();
+const weekStart = startOfWeek(today, { weekStartsOn: 1 });
+const weekEnd = endOfWeek(today, { weekStartsOn: 1 });
 
-export let user_tasks = new TaskManager(); // All the tasks that the user created at the moment
+export let task_database = new TaskManager(); // Class with the tasks created
+
 
 export class TaskFormUI {
 
@@ -71,17 +76,13 @@ export class TaskFormUI {
         highPriorityOp.textContent = "🔴 high";
         highPriorityOp.value = "high"
 
-        prioritySelector.append(lowPriorityOp, mediumPriorityOp , highPriorityOp);
+        prioritySelector.append (lowPriorityOp, mediumPriorityOp , highPriorityOp);
         priorityDiv.appendChild(prioritySelector);
 
         const submitButton = document.createElement("button");
         submitButton.type = "submit";
         submitButton.classList.add("btn");
         submitButton.textContent = "Create Task";
-
-        const resetButton = document.createElement("input");
-        resetButton.type = "reset";
-        resetButton.value = "Reset";
 
         const closeButton = document.createElement("button");
         closeButton.type = "button";
@@ -94,7 +95,7 @@ export class TaskFormUI {
             descLabel, descInput,
             dateLabel, dateInput,
             priorityDiv, submitButton,
-            resetButton, closeButton
+            closeButton
         );
 
         formPopup.appendChild(formContainer);
@@ -115,9 +116,11 @@ export class TaskFormUI {
 
             const task = new Task(formData.name, formData.dueDate, formData.description, formData.priority, []);
 
-            user_tasks.addTask(task);
+            task_database.addTask(task);
 
-            console.log(user_tasks);
+            todayContent.render();
+
+            console.log(task_database);
 
             formPopup.style.display = "none";
         });
@@ -126,3 +129,58 @@ export class TaskFormUI {
     }
 }
 
+export class TaskCardUI {
+
+    constructor(task) {
+      this.task = task;
+    }
+  
+    render(){
+      const taskContainer = document.createElement('div');
+      taskContainer.className = "task";
+  
+      const taskTitle = document.createElement('div');
+      taskTitle.id = "task-title";
+      taskTitle.textContent = this.task.task_name;
+  
+      const taskDueDate = document.createElement('span');
+      taskDueDate.id = "due-date";
+      taskDueDate.textContent = "Due date: " + this.task.task_due_date;
+  
+      const taskDescription = document.createElement('p');
+      taskDescription.id = "task-description"; 
+      taskDescription.textContent = this.task.task_description;
+  
+      const taskOptions = document.createElement('div');
+      taskOptions.className = "task-options";
+  
+      const taskDeleteBtn = document.createElement('button');
+      taskDeleteBtn.className = "delete-task"
+      const taskEditBtn = document.createElement('button');
+      taskEditBtn.className = "edit-task";
+  
+  
+      const taskChecklist = document.createElement('ul');
+      taskChecklist.className = "task-checklist";
+  
+      const checklistAdd = document.createElement('div');
+      checklistAdd.className = "task-checklist-div";
+  
+      const newElementList = document.createElement('input');
+      newElementList.type = "text";
+      newElementList.id = "new-element";
+      newElementList.placeholder = "Add a new task! ";
+  
+      const submitNewElementList = document.createElement('button');
+      submitNewElementList.id = "add-element-btn";
+  
+      taskChecklist.appendChild(newElementList , submitNewElementList);
+  
+      taskOptions.appendChild(taskDeleteBtn, taskEditBtn);
+  
+      taskContainer.appendChild(taskTitle,taskDescription,taskOptions,taskChecklist);
+  
+      return taskContainer;
+    }
+}
+  
