@@ -1,13 +1,11 @@
 import { Task , TaskManager } from "./task_logic.js";
-import {format, parse, isWithinInterval, startOfWeek, endOfWeek} from "date-fns";
+import {format, parseISO} from "date-fns";
 import {todayContent} from "../index.js"
 
-let today = new Date();
-const weekStart = startOfWeek(today, { weekStartsOn: 1 });
-const weekEnd = endOfWeek(today, { weekStartsOn: 1 });
-
+let today = format(new Date(), 'dd-MM-yyyy');
 export let task_database = new TaskManager(); // Class with the tasks created
 
+export let todaysTasks = [];
 
 export class TaskFormUI {
 
@@ -103,20 +101,26 @@ export class TaskFormUI {
         formContainer.addEventListener("submit", (event) => {
             event.preventDefault();
 
+            const dateSelected = parseISO(dateInput.value);
+
             const formData = {
                 name: nameInput.value.trim(),
                 description: descInput.value.trim(),
-                dueDate: format(dateInput.value, 'dd-MM-yyyy'), // default format for date input is YYYY-MM-dd
+                dueDate: format(dateSelected, 'dd-MM-yyyy'), // default format for date input is YYYY-MM-dd
                 priority: prioritySelector.value || "low"
             };
 
             this.onSubmit?.(formData);
 
-            console.log(formData);
-
             const task = new Task(formData.name, formData.dueDate, formData.description, formData.priority, []);
 
             task_database.addTask(task);
+
+            if (task.task_due_date === today){
+                console.log("TASK IS TODAY");
+                todaysTasks.push(task);
+                console.log(todaysTasks);
+            }
 
             todayContent.render();
 
@@ -136,6 +140,7 @@ export class TaskCardUI {
     }
   
     render(){
+
       const taskContainer = document.createElement('div');
       taskContainer.className = "task";
   
@@ -156,6 +161,7 @@ export class TaskCardUI {
   
       const taskDeleteBtn = document.createElement('button');
       taskDeleteBtn.className = "delete-task"
+      
       const taskEditBtn = document.createElement('button');
       taskEditBtn.className = "edit-task";
   
@@ -174,11 +180,9 @@ export class TaskCardUI {
       const submitNewElementList = document.createElement('button');
       submitNewElementList.id = "add-element-btn";
   
-      taskChecklist.appendChild(newElementList , submitNewElementList);
-  
-      taskOptions.appendChild(taskDeleteBtn, taskEditBtn);
-  
-      taskContainer.appendChild(taskTitle,taskDescription,taskOptions,taskChecklist);
+      taskChecklist.append(newElementList , submitNewElementList);  
+      taskOptions.append(taskDeleteBtn, taskEditBtn);
+      taskContainer.append(taskTitle,taskDescription,taskOptions,taskChecklist);
   
       return taskContainer;
     }
