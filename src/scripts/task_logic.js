@@ -9,7 +9,7 @@ export class Task {
       return ++Task.idCounter;
     }
   
-    constructor(task_name, task_due_date, task_description = "", task_priority = "low", checklist = [], id = null) {
+    constructor(task_name, task_due_date, task_description = "No Description...", task_priority = "low", checklist = [], id = null) {
       
       if (!task_name || typeof task_name !== "string" || task_name.length > 20) {
         throw new Error("task_name is required and must be a string less than 20 characters.");
