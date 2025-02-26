@@ -144,25 +144,28 @@ export class TaskCardUI {
       const taskContainer = document.createElement('div');
       taskContainer.className = "task";
   
-      const taskTitle = document.createElement('div');
+      const taskTitle = document.createElement('h4');
       taskTitle.id = "task-title";
       taskTitle.textContent = this.task.task_name;
   
       const taskDueDate = document.createElement('span');
       taskDueDate.id = "due-date";
-      taskDueDate.textContent = "Due date: " + this.task.task_due_date;
+      taskDueDate.textContent = "Due date: " + String(this.task.task_due_date);
   
       const taskDescription = document.createElement('p');
       taskDescription.id = "task-description"; 
       taskDescription.textContent = this.task.task_description;
   
       const taskOptions = document.createElement('div');
+      
       taskOptions.className = "task-options";
   
       const taskDeleteBtn = document.createElement('button');
+      taskDeleteBtn.textContent = "Delete";
       taskDeleteBtn.className = "delete-task"
-      
+
       const taskEditBtn = document.createElement('button');
+      taskEditBtn.textContent = "Edit";
       taskEditBtn.className = "edit-task";
   
   
@@ -178,11 +181,12 @@ export class TaskCardUI {
       newElementList.placeholder = "Add a new task! ";
   
       const submitNewElementList = document.createElement('button');
+      submitNewElementList.textContent = "ADD TO CHECKLIST"
       submitNewElementList.id = "add-element-btn";
   
       taskChecklist.append(newElementList , submitNewElementList);  
       taskOptions.append(taskDeleteBtn, taskEditBtn);
-      taskContainer.append(taskTitle,taskDescription,taskOptions,taskChecklist);
+      taskContainer.append(taskTitle,taskDescription,taskDueDate,taskOptions,taskChecklist);
   
       return taskContainer;
     }

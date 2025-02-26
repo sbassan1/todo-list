@@ -10,11 +10,15 @@ export class TodayPage {
     
         const tasksBox = document.getElementsByClassName('tasks-box')[0]; 
         
+        tasksBox.innerHTML = "";
+
         todaysTasks.forEach(task => {
             const elementTask = new TaskCardUI(task);
             tasksBox.appendChild(elementTask.render());
         });
-    }    
+    }
+
+
 
 }
 
