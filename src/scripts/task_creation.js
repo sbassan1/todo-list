@@ -99,6 +99,7 @@ export class TaskFormUI {
 
         formPopup.appendChild(formContainer);
 
+        // Submitting the form into the database
         formContainer.addEventListener("submit", (event) => {
             event.preventDefault();
 
@@ -115,15 +116,20 @@ export class TaskFormUI {
 
             const task = new Task(formData.name, formData.dueDate, formData.description, formData.priority, []);
 
+            // task added to the general database
             task_database.addTask(task);
 
+            // check if the task is today
             if (task.task_due_date === today){
-                console.log("TASK IS TODAY");
                 todaysTasks.push(task);
                 console.log(todaysTasks);
             }
+            // check if the task is this week 
+
 
             todayContent.render();
+            // weekly tasks render();
+            // all tasks render();
 
             console.log(task_database);
 
@@ -191,8 +197,13 @@ export class TaskCardUI {
 
         // BUTTONS AND EDITING
 
+        // Make it finished
+
+
+        // Delete task 
         taskDeleteBtn.addEventListener("click", () => {
             task_database.deleteTask(this.task.id);
+            this.remove(); // Remove element from DOM
         });
 
         // Editing name
@@ -238,6 +249,10 @@ export class TaskCardUI {
                 }
             });
         });
+
+        // Edit due_date
+
+        // Edit checklists
 
         
         return taskContainer;
