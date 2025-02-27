@@ -41,7 +41,7 @@ export class TaskFormUI {
 
         const descInput = document.createElement("input");
         descInput.type = "text";
-        descInput.value = "No Description...";f
+        descInput.value = "No Description...";
         descInput.placeholder = "Enter Description (Optional)";
         descInput.name = "description";
 
@@ -195,6 +195,16 @@ export class TaskCardUI {
         taskOptions.append(taskDeleteBtn, taskEditBtn);
         taskContainer.append(taskTitle,taskDescription,taskDueDate,taskOptions,taskChecklist);
 
+        const priorityColors = {
+            low: "rgb(0 255 129)",
+            medium: "#fcd53f",
+            high: "#f8312f"
+        };
+
+        if (priorityColors[this.task.task_priority]) {
+            taskContainer.style.background = `linear-gradient(to left, ${priorityColors[this.task.task_priority]}, white)`;
+        }
+
         // BUTTONS AND EDITING
 
         // Make it finished
@@ -203,7 +213,7 @@ export class TaskCardUI {
         // Delete task 
         taskDeleteBtn.addEventListener("click", () => {
             task_database.deleteTask(this.task.id);
-            this.remove(); // Remove element from DOM
+            taskContainer.remove();
         });
 
         // Editing name
