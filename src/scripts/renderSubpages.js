@@ -37,7 +37,7 @@ export class WeekPage {
 
         task_database.user_tasks.forEach( (task) => {
 
-            if(isThisWeek( parse(task.task_due_date, 'dd-MM-yyyy', new Date()) )  ){
+            if(isThisWeek( parse(task.task_due_date, 'dd-MM-yyyy', new Date()) , { weekStartsOn: 1 })){ // The week starts in monday rather than sunday, thanks USA...
                 const taskCardElement = new TaskCardUI(task);
                 tasksBox.appendChild(taskCardElement.render());
                 new TaskCardController(task, taskCardElement);
@@ -46,6 +46,26 @@ export class WeekPage {
 
         console.log(task_database.user_tasks);
     }
+}
+
+export class AllTasks {
+
+    render() {
+        const titlePage = document.getElementById('title-page');
+        titlePage.textContent = "ALL TASKS! WATCH OUT!!";
+    
+        const tasksBox = document.getElementsByClassName('tasks-box')[0]; 
+        tasksBox.innerHTML = "";
+
+        task_database.user_tasks.forEach( (task) => {
+            const taskCardElement = new TaskCardUI(task);
+            tasksBox.appendChild(taskCardElement.render());
+            new TaskCardController(task, taskCardElement);
+        });
+
+        console.log(task_database.user_tasks);
+    }
+
 }
 
     

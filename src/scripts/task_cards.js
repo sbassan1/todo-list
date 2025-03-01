@@ -91,7 +91,7 @@ export class TaskCardController {
 
     setupEventListeners() {
 
-        const { taskContainer, taskTitle, taskDueDate, taskDescription, taskDeleteBtn } = this.ui.elements;
+        const { taskContainer, taskTitle, taskDueDate, taskDescription, taskDeleteBtn, taskChecklist } = this.ui.elements;
 
         taskDeleteBtn.addEventListener("click", () => {
             task_database.deleteTask(this.task.id);
@@ -157,6 +157,5 @@ export class TaskCardController {
             });
         });
     }
-
 
 };
