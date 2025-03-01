@@ -2,10 +2,10 @@ import { Task , TaskManager } from "./task_logic.js";
 import {format, parseISO} from "date-fns";
 import {todayContent} from "../index.js"
 
-let today = format(new Date(), 'dd-MM-yyyy');
 export let task_database = new TaskManager(); // Class with the tasks created
 
 export let todaysTasks = [];
+export let weekTask = [];
 
 export class TaskFormUI {
 
@@ -119,13 +119,13 @@ export class TaskFormUI {
             // task added to the general database
             task_database.addTask(task);
 
-            // check if the task is today
-            if (task.task_due_date === today){
-                todaysTasks.push(task);
-                console.log(todaysTasks);
-            }
-            // check if the task is this week 
+            // NOW WE NEED TO SHOVE THE TASKS TO EACH ARRAY, today and Weekly
+            
+            todaysTasks = task_database.user_tasks.filter((i) => {  // To do find a way to store them right away instead of filtering to optimize
+                return i.task_due_date === format(new Date(), 'dd-MM-yyyy');;
+            });
 
+            console.log(todaysTasks);
 
             todayContent.render();
             // weekly tasks render();
@@ -261,6 +261,32 @@ export class TaskCardUI {
         });
 
         // Edit due_date
+        taskDueDate.addEventListener("dblclick", () => {
+            const input = document.createElement("input");
+            input.type = "date";
+            
+            taskDueDate.replaceWith(input);
+            input.focus();
+
+            input.addEventListener("blur", () => {
+                taskDueDate.textContent = "Due date: " + String(format(parseISO(input.value), 'dd-MM-yyyy'));
+                input.replaceWith(taskDueDate);
+            });
+
+            input.addEventListener("keydown", (event) => {
+                if (event.key === "Enter") {
+                    input.blur();
+                    task_database.editDueDate(this.task.id, format(parseISO(input.value), 'dd-MM-yyyy'));
+                    
+                    todaysTasks = task_database.user_tasks.filter((i) => {
+                        return i.task_due_date === format(new Date(), 'dd-MM-yyyy');;
+                    });
+                
+                    todayContent.render();
+                }
+            });
+        });
+
 
         // Edit checklists
 

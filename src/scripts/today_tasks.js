@@ -1,7 +1,5 @@
 import {todaysTasks, TaskCardUI} from "./task_creation";
 
-
-
 export class TodayPage {
 
     render() {
@@ -17,8 +15,6 @@ export class TodayPage {
             tasksBox.appendChild(elementTask.render());
         });
     }
-
-
 
 }
 
