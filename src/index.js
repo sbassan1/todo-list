@@ -1,19 +1,29 @@
 import "./styles/main.css"
 import "./styles/today.css"
 import "./styles/task_form.css"
+
 import {MainContentBase} from "./scripts/base_content_task.js";
-import {TodayPage} from "./scripts/today_tasks.js";
-import {TaskFormUI} from "./scripts/task_creation.js";
+import {TodayPage, WeekPage} from "./scripts/renderSubpages.js";
+import {TaskFormUI} from "./scripts/task_form.js";
 
 const content = document.getElementsByClassName('main-content')[0];
 const todayBtn = document.getElementsByClassName('today-button')[0];
+const weekBtn = document.getElementsByClassName('week-button')[0]; 
 
 
-const mainContent = new MainContentBase();
-export const todayContent = new TodayPage();
-
-
+const mainContent = new MainContentBase(); // The base for the content of subpages
 const taskForm = new TaskFormUI(); // The taskData is the inputs of the form submitted by the user.
+
+export const todayContent = new TodayPage();
+export const weekContent = new WeekPage();
+
+
+const pageIndex = [todayContent, weekContent];
+let current_page = pageIndex[0];
+
+export function getCurrentPage() {
+    return current_page;
+};
 
 // Render subpages
 function renderContent(contentToRender) {
@@ -21,11 +31,18 @@ function renderContent(contentToRender) {
     mainContent.render();
     content.appendChild(taskForm.createTaskForm()); // Render the form, visible
     contentToRender.render()
-}
+};
 
 todayBtn.addEventListener("click", () => {
     console.log("Today button clicked.");
+    current_page = pageIndex[0];
     renderContent(todayContent);
+});
+
+weekBtn.addEventListener("click", () => {
+    console.log("Week button clicked.");
+    current_page = pageIndex[1];
+    renderContent(weekContent);
 });
 
 

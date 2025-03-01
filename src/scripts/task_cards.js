@@ -1,7 +1,6 @@
 import {format, parseISO} from "date-fns";
-import {task_database} from "./task_creation";
-import {todayContent} from "../index.js"
-
+import {task_database} from "./task_form.js";
+import {todayContent, weekContent, getCurrentPage} from "../index.js"
 
 
 export class TaskCardUI {
@@ -148,8 +147,7 @@ export class TaskCardController {
                 input.replaceWith(element);
                 task_database.editDueDate(this.task.id, newDate);
 
-                todayContent.render();
-                //weekContent.render();
+                getCurrentPage().render();
             });
 
             input.addEventListener("keydown", (event) => {

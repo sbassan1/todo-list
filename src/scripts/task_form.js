@@ -1,6 +1,6 @@
 import {Task,TaskManager } from "./task_logic.js";
-import {format, parseISO, isThisWeek, parse} from "date-fns";
-import {todayContent} from "../index.js"
+import {format, parseISO} from "date-fns";
+import {getCurrentPage} from "../index.js"
 
 export let task_database = new TaskManager(); // Class with the tasks created
 
@@ -100,7 +100,6 @@ export class TaskFormUI {
         formPopup.appendChild(formContainer);
 
         // Submitting the form into the database
-
         formContainer.addEventListener("submit", (event) => {
             event.preventDefault();
 
@@ -108,7 +107,7 @@ export class TaskFormUI {
             const formData = {
                 name: nameInput.value.trim(),
                 description: descInput.value.trim(),
-                dueDate: format(dateSelected, 'dd-MM-yyyy'), // default format for date input is YYYY-MM-dd
+                dueDate: format(dateSelected, 'dd-MM-yyyy'), // default format for html input "date" is YYYY-MM-dd
                 priority: prioritySelector.value || "low"
             };
             this.onSubmit?.(formData);
@@ -117,9 +116,9 @@ export class TaskFormUI {
 
             task_database.addTask(task);
 
-            todayContent.render();
-            // weekly tasks render();
-            //
+            // Render the effects on the current page
+            getCurrentPage().render();
+
             formPopup.style.display = "none"; // Close display after submitting!
         });
 
