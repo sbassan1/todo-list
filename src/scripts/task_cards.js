@@ -38,10 +38,10 @@ export class TaskCardUI {
         taskEditBtn.textContent = "Edit";
         taskEditBtn.className = "edit-task";
 
-        const taskChecklist = document.createElement('ul');
+        const taskChecklist = document.createElement('div');
         taskChecklist.className = "task-checklist";
 
-        const checklistAdd = document.createElement('div');
+        const checklistAdd = document.createElement('ul');
         checklistAdd.className = "task-checklist-div";
 
         const newElementList = document.createElement('input');
@@ -49,11 +49,11 @@ export class TaskCardUI {
         newElementList.id = "new-element";
         newElementList.placeholder = "Add a new task! ";
 
-        const submitNewElementList = document.createElement('button');
-        submitNewElementList.textContent = "ADD TO CHECKLIST"
-        submitNewElementList.id = "add-element-btn";
+        const submitNewElementBtn = document.createElement('button');
+        submitNewElementBtn.textContent = "ADD TO CHECKLIST"
+        submitNewElementBtn.id = "add-element-btn";
 
-        taskChecklist.append(newElementList , submitNewElementList);  
+        taskChecklist.append(newElementList , submitNewElementBtn, checklistAdd);  
         taskOptions.append(taskDeleteBtn, taskEditBtn);
         taskContainer.append(taskTitle,taskDescription,taskDueDate,taskOptions,taskChecklist);
 
@@ -74,10 +74,26 @@ export class TaskCardUI {
             taskDescription,
             taskDeleteBtn,
             taskEditBtn,
-            taskChecklist
+            checklistAdd,
+            taskChecklist,
+            newElementList,
+            submitNewElementBtn
         };
         
+        this.renderChecklist();  
+
         return taskContainer;
+    }
+
+    renderChecklist() {
+        const checklistUI = this.elements.checklistAdd;
+        checklistUI.innerHTML = "";
+    
+        this.task.checklist.forEach(elementItem => {
+            const elementLi = document.createElement("li");
+            elementLi.textContent = elementItem;
+            checklistUI.appendChild(elementLi);
+        });
     }
 } 
 
@@ -91,12 +107,23 @@ export class TaskCardController {
 
     setupEventListeners() {
 
-        const { taskContainer, taskTitle, taskDueDate, taskDescription, taskDeleteBtn, taskChecklist } = this.ui.elements;
+        const { taskContainer, taskTitle, taskDueDate, taskDescription, taskDeleteBtn, checklistAdd, taskChecklist, newElementList, submitNewElementBtn} = this.ui.elements;
 
         taskDeleteBtn.addEventListener("click", () => {
             task_database.deleteTask(this.task.id);
             taskContainer.remove();
         });
+
+        submitNewElementBtn.addEventListener("click", () => {
+
+            if (newElementList.value.trim() !== "") {
+                this.task.checklist.push(newElementList.value.trim());
+                task_database.editChecklist(this.task.id, this.task.checklist);
+                this.ui.renderChecklist(); // Re-render the checklist
+                newElementList.value = ""; // Clear input field after adding
+            }
+        });
+        
 
         this.enableEditableText(taskTitle, (newText) => {
             task_database.editName(this.task.id, newText);

@@ -61,6 +61,7 @@ export class AllTasks {
             const taskCardElement = new TaskCardUI(task);
             tasksBox.appendChild(taskCardElement.render());
             new TaskCardController(task, taskCardElement);
+
         });
 
         console.log(task_database.user_tasks);
