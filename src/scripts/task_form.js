@@ -116,6 +116,9 @@ export class TaskFormUI {
 
             task_database.addTask(task);
 
+            // save the new task list to local storage
+            task_database.saveTasks();
+
             // Render the effects on the current page
             getCurrentPage().render();
 

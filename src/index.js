@@ -53,5 +53,3 @@ allBtn.addEventListener("click", () => {
     current_page = pageIndex[2];
     renderContent(allTasksContent);
 });
-
-

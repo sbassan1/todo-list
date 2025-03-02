@@ -132,7 +132,7 @@ export class TaskCardController {
         // add a new element to checklist of task, render checklist UI again
         submitNewElementBtn.addEventListener("click", () => {
             if (newElementList.value.trim() !== "") {
-                this.task.checklist.push(newElementList.value.trim());
+                this.task.checklist.push({ text: newElementList.value.trim(), completed: false });
                 task_database.editChecklist(this.task.id, this.task.checklist);
                 this.ui.renderChecklist(); 
                 newElementList.value = "";
@@ -185,13 +185,13 @@ export class TaskCardController {
             input.focus();
 
             input.addEventListener("blur", () => {
-                const newDate = format(parseISO(input.value), 'dd-MM-yyyy');
-                element.textContent = "Due date: " + newDate;
-
+                if (input.value) {
+                    const newDate = format(parseISO(input.value), 'dd-MM-yyyy');
+                    element.textContent = "Due date: " + newDate;
+                    task_database.editDueDate(this.task.id, newDate);
+                    getCurrentPage().render();
+                }
                 input.replaceWith(element);
-                task_database.editDueDate(this.task.id, newDate);
-
-                getCurrentPage().render();
             });
 
             input.addEventListener("keydown", (event) => {
