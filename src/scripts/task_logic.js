@@ -1,6 +1,6 @@
 // THIS FILE CONTAINS THE CLASSES FOR LOGIC OF TASKS AND EDITING TASKS IN CONSOLE
 
-
+// Task class with constructor
 export class Task {
 
     static idCounter = 0;
@@ -28,9 +28,13 @@ export class Task {
         throw new Error("task_priority must be 'low', 'medium', or 'high'.");
       }
   
-      if (!Array.isArray(checklist) || !checklist.every(item => typeof item === "string")) {
-        throw new Error("checklist must be an array of strings.");
+      if (!Array.isArray(checklist)) {
+        throw new Error("checklist must be an array.");
       }
+
+      this.checklist = checklist.map(item => 
+        typeof item === "string" ? { text: item, completed: false } : item
+      );
   
       this.id = id || Task.generateId();
       this.task_name = task_name;
@@ -38,7 +42,6 @@ export class Task {
       this.task_due_date = task_due_date;
       this.task_priority = task_priority;
       this.task_status = "incomplete";
-      this.checklist = checklist;
     }
   
     static isValidDate(dateStr) {
@@ -47,13 +50,15 @@ export class Task {
     }
   
     updateChecklist(newChecklist) {
-      if (!Array.isArray(newChecklist) || !newChecklist.every(item => typeof item === "string")) {
-        throw new Error("newChecklist must be an array of strings.");
+      if (!Array.isArray(newChecklist) || !newChecklist.every(item => typeof item.text === "string" && typeof item.completed === "boolean")) {
+          throw new Error("newChecklist must be an array of objects { text, completed }.");
       }
       this.checklist = newChecklist;
-    }
-}
+  }
   
+}
+ 
+// TaskManager class to store tasks and modify their parameters
 export class TaskManager {
     constructor() {
       this.user_tasks = [];
@@ -62,9 +67,8 @@ export class TaskManager {
     findTaskIndexById(taskId) {
       return this.user_tasks.findIndex(task => task.id === taskId);
     }
-  
+
     addTask(task) {
-      // Accept only valid Task instances
       if (!(task instanceof Task)) {
         console.error("Invalid task object.");
         return;
@@ -151,17 +155,26 @@ export class TaskManager {
       console.log("Task priority changed to:", newPriority);
     }
   
+    // checklist elements must be an object with text and a completion tag
     editChecklist(taskId, newChecklist) {
       const index = this.findTaskIndexById(taskId);
+
       if (index === -1) {
-        console.error("Task not found.");
-        return;
+          console.error("Task not found.");
+          return;
       }
       try {
-        this.user_tasks[index].updateChecklist(newChecklist);
-        console.log("Task checklist updated.");
+        // When submitting elements we only have the text, we need to set their completion to false and then create the object for database
+        const formattedChecklist = newChecklist.map(item =>
+              typeof item === "string" ? { text: item, completed: false } : item
+          );
+
+          this.user_tasks[index].updateChecklist(formattedChecklist);
+          console.log("Task checklist updated.");
+
       } catch (error) {
-        console.error(error.message);
+          console.error(error.message);
       }
     }
+  
 }

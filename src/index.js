@@ -23,6 +23,7 @@ export const allTasksContent = new AllTasks();
 const pageIndex = [todayContent, weekContent, allTasksContent];
 let current_page = pageIndex[0];
 
+// function to get current page to render in rendersubpages
 export function getCurrentPage() {
     return current_page;
 };

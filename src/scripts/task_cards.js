@@ -1,6 +1,6 @@
 import {format, parseISO} from "date-fns";
 import {task_database} from "./task_form.js";
-import {todayContent, weekContent, getCurrentPage} from "../index.js"
+import {getCurrentPage} from "../index.js"
 
 
 export class TaskCardUI {
@@ -10,6 +10,7 @@ export class TaskCardUI {
       this.elements = {};
     }
   
+    // Render task card UI
     render(){
         const taskContainer = document.createElement('div');
         taskContainer.className = "task";
@@ -85,13 +86,25 @@ export class TaskCardUI {
         return taskContainer;
     }
 
+    // render the checklist on task UI, checking elements completion
     renderChecklist() {
         const checklistUI = this.elements.checklistAdd;
         checklistUI.innerHTML = "";
     
-        this.task.checklist.forEach(elementItem => {
+        this.task.checklist.forEach((elementItem, index) => {
             const elementLi = document.createElement("li");
-            elementLi.textContent = elementItem;
+            elementLi.textContent = elementItem.text;
+    
+            if (elementItem.completed) {
+                elementLi.style.textDecoration = "line-through";
+            }
+    
+            elementLi.addEventListener("click", () => {
+                elementItem.completed = !elementItem.completed;
+                task_database.editChecklist(this.task.id, this.task.checklist);
+                this.renderChecklist();
+            });
+    
             checklistUI.appendChild(elementLi);
         });
     }
@@ -105,36 +118,39 @@ export class TaskCardController {
         this.setupEventListeners();
     }
 
+    // set all functions to control task card elements
     setupEventListeners() {
 
         const { taskContainer, taskTitle, taskDueDate, taskDescription, taskDeleteBtn, checklistAdd, taskChecklist, newElementList, submitNewElementBtn} = this.ui.elements;
 
+        // delete task from database and UI
         taskDeleteBtn.addEventListener("click", () => {
             task_database.deleteTask(this.task.id);
             taskContainer.remove();
         });
 
+        // add a new element to checklist of task, render checklist UI again
         submitNewElementBtn.addEventListener("click", () => {
-
             if (newElementList.value.trim() !== "") {
                 this.task.checklist.push(newElementList.value.trim());
                 task_database.editChecklist(this.task.id, this.task.checklist);
-                this.ui.renderChecklist(); // Re-render the checklist
-                newElementList.value = ""; // Clear input field after adding
+                this.ui.renderChecklist(); 
+                newElementList.value = "";
             }
         });
         
-
+        // Edit task title and desc with double click 
         this.enableEditableText(taskTitle, (newText) => {
             task_database.editName(this.task.id, newText);
         });
-
         this.enableEditableText(taskDescription, (newText) => {
             task_database.editDescription(this.task.id, newText);
         });
 
+        // Edit due-date of task in database
         this.enableEditableDate(taskDueDate);
     }
+
 
     enableEditableText(element, onSave) {
         element.addEventListener("dblclick", () => {
@@ -158,6 +174,7 @@ export class TaskCardController {
             });
         });
     }
+
 
     enableEditableDate(element) {
         element.addEventListener("dblclick", () => {
