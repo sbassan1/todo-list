@@ -9,14 +9,77 @@
 
 }
 
-
 .task {
     background-color: #f2f2f2;
-    padding: 6px;
-    border-radius: 6px;
+    padding: 10px;
+    border-radius: 1em;
+
+    display: grid;
+    grid-template-columns: 3fr 3fr 1fr;
+    grid-template-rows: 1fr;
+    row-gap: 5px;
 }
 
+#task-title {
+    font-size: 2em;
+    color: #000000ca;
+    grid-column: 1/2;
+    text-wrap:inherit;
+}
+
+#task-description {
+    color: #0000009e;
+    grid-column: 1/4;
+}
 
 .task-options {
     width: 100%;
+    grid-column: 3/4;
+    grid-row: 1/2;
+
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.task-options button {
+    height: 1.3em;
+}
+
+#due-date {
+    grid-column: 2/3;
+    grid-row: 1/2;
+
+    background-color: #00000036;
+    border-radius: 1em;
+
+    padding: 1px;
+    justify-self:end;
+    align-self: center;
+    border-color: #0000009e;
+    border-style: solid;
+}
+
+.task-checklist {
+    grid-column: 1/4;
+    grid-row: 3/4;
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#new-element {
+    width: 25%;
+}
+
+#add-element-btn {
+    width: 25%;
+}
+
+.task-checklist-div{
+    background-color: #00000036;
+    border-radius: 1em;
+    border-color: #0000009e;
+    padding: 10px;
 }

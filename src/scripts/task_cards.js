@@ -65,7 +65,7 @@ export class TaskCardUI {
         };
 
         if (priorityColors[this.task.task_priority]) {
-            taskContainer.style.background = `linear-gradient(to left, ${priorityColors[this.task.task_priority]}, white)`;
+            taskContainer.style.backgroundColor = `${priorityColors[this.task.task_priority]}`;
         }
 
         this.elements = {
