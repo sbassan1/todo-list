@@ -21,7 +21,7 @@
 }
 
 #task-title {
-    font-size: 2em;
+    font-size: 1.8em;
     color: #000000ca;
     grid-column: 1/2;
     text-wrap:inherit;
@@ -53,7 +53,9 @@
     background-color: #00000036;
     border-radius: 1em;
 
-    padding: 1px;
+    font-size: 1.1em;
+
+    padding: 10px;
     justify-self:end;
     align-self: center;
     border-color: #0000009e;
@@ -71,15 +73,43 @@
 
 #new-element {
     width: 25%;
+    font-size: 1.1em;
 }
 
 #add-element-btn {
     width: 25%;
+    font-size: 1.1em;
 }
+
+.delete-task {
+    width: 40px;  /* Ensure equal width and height */
+    height: 40px;
+    padding: 0; /* Remove any default padding */
+    border-radius: 50%; /* Make it a perfect circle */
+    border: none;
+    background-color: #00000032; /* Red delete color */
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.delete-task:hover {
+    background-color: #000000c0; /* Darker red on hover */
+}
+  
 
 .task-checklist-div{
     background-color: #00000036;
     border-radius: 1em;
     border-color: #0000009e;
     padding: 10px;
+}
+
+.task-checklist-div li {
+    font-size: 1.2em;
 }

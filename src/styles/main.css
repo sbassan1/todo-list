@@ -28,13 +28,11 @@ ul{
 }
 
 .sidebar {
-
     grid-column: 1/2;
     grid-row: 1/2;
 
     padding: 1em;
-
-    font-size: 18px;
+    font-size: 1.4em;
 
     color: #585858;
     background-color: #f4f4f4;
@@ -42,7 +40,6 @@ ul{
     display: flex;
     flex-direction: column;
     gap: 30px;
-
 }
 
 .search input {
@@ -95,12 +92,12 @@ ul{
     grid-row: 2/3;
 }
 
-#today {
-    font-size: 1.5em;
+#title-page {
+    font-size: 2em;
     font-weight: bold;
 }
 
 #btn-add-task {
-    height: 30px;
+    height: 45px;
 }
 

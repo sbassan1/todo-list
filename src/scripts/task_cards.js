@@ -31,13 +31,9 @@ export class TaskCardUI {
         
         taskOptions.className = "task-options";
 
-        const taskDeleteBtn = document.createElement('button');
-        taskDeleteBtn.textContent = "Delete";
+        const taskDeleteBtn = document.createElement('div');
+        taskDeleteBtn.innerHTML = "&times;";
         taskDeleteBtn.className = "delete-task"
-
-        const taskEditBtn = document.createElement('button');
-        taskEditBtn.textContent = "Edit";
-        taskEditBtn.className = "edit-task";
 
         const taskChecklist = document.createElement('div');
         taskChecklist.className = "task-checklist";
@@ -55,7 +51,7 @@ export class TaskCardUI {
         submitNewElementBtn.id = "add-element-btn";
 
         taskChecklist.append(newElementList , submitNewElementBtn, checklistAdd);  
-        taskOptions.append(taskDeleteBtn, taskEditBtn);
+        taskOptions.append(taskDeleteBtn);
         taskContainer.append(taskTitle,taskDescription,taskDueDate,taskOptions,taskChecklist);
 
         const priorityColors = {
@@ -74,7 +70,6 @@ export class TaskCardUI {
             taskDueDate,
             taskDescription,
             taskDeleteBtn,
-            taskEditBtn,
             checklistAdd,
             taskChecklist,
             newElementList,
@@ -172,6 +167,8 @@ export class TaskCardController {
                     input.blur();
                 }
             });
+
+            task_database.saveTasks(); 
         });
     }
 

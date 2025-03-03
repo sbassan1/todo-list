@@ -1,6 +1,15 @@
 
 #myForm {
     display: none;
+    font-size: 1.4em;
+}
+
+#myForm input {
+    font-size: 0.8em;
+}
+
+#myForm button {
+    font-size: 0.7em;
 }
 
 .form-container fieldset label {
@@ -27,5 +36,8 @@
     width: 100%;
 }
 
+#priority-select {
+    font-size: 1em;
+}
 
 
