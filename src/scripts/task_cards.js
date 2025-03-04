@@ -86,7 +86,7 @@ export class TaskCardUI {
         const checklistUI = this.elements.checklistAdd;
         checklistUI.innerHTML = "";
     
-        this.task.checklist.forEach((elementItem, index) => {
+        this.task.checklist.forEach((elementItem) => {
             const elementLi = document.createElement("li");
             elementLi.textContent = elementItem.text;
     
@@ -116,7 +116,7 @@ export class TaskCardController {
     // set all functions to control task card elements
     setupEventListeners() {
 
-        const { taskContainer, taskTitle, taskDueDate, taskDescription, taskDeleteBtn, checklistAdd, taskChecklist, newElementList, submitNewElementBtn} = this.ui.elements;
+        const { taskContainer, taskTitle, taskDueDate, taskDescription, taskDeleteBtn, newElementList, submitNewElementBtn} = this.ui.elements;
 
         // delete task from database and UI
         taskDeleteBtn.addEventListener("click", () => {

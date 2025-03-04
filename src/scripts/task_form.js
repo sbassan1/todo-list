@@ -12,9 +12,7 @@ export class TaskFormUI {
     }
 
     createTaskForm() {
-
-        const today = format(new Date(), 'dd-MM-yyyy');
-        
+                
         const formPopup = document.createElement("div");
         formPopup.classList.add("form-popup");
         formPopup.id = "myForm";
