@@ -1,43 +1,40 @@
-
 #myForm {
-    display: none;
-    font-size: 1.4em;
+  display: none;
+  font-size: 1.4em;
 }
 
 #myForm input {
-    font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 #myForm button {
-    font-size: 0.7em;
+  font-size: 0.7em;
 }
 
 .form-container fieldset label {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    height: 10;
-    align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  height: 10;
+  align-items: center;
 }
 
 .form-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 999;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .form-container input,
 .form-container fieldset {
-    width: 100%;
+  width: 100%;
 }
 
 #priority-select {
-    font-size: 1em;
+  font-size: 1em;
 }
-
-

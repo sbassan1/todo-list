@@ -1,115 +1,112 @@
-
 .tasks-box {
-    /* background-color: aquamarine; */
-    padding: 15px;
+  /* background-color: aquamarine; */
+  padding: 15px;
 
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .task {
-    background-color: #f2f2f2;
-    padding: 10px;
-    border-radius: 1em;
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-radius: 1em;
 
-    display: grid;
-    grid-template-columns: 3fr 3fr 1fr;
-    grid-template-rows: 1fr;
-    row-gap: 5px;
+  display: grid;
+  grid-template-columns: 3fr 3fr 1fr;
+  grid-template-rows: 1fr;
+  row-gap: 5px;
 }
 
 #task-title {
-    font-size: 1.8em;
-    color: #000000ca;
-    grid-column: 1/2;
-    text-wrap:inherit;
+  font-size: 1.8em;
+  color: #000000ca;
+  grid-column: 1/2;
+  text-wrap: inherit;
 }
 
 #task-description {
-    color: #0000009e;
-    grid-column: 1/4;
+  color: #0000009e;
+  grid-column: 1/4;
 }
 
 .task-options {
-    width: 100%;
-    grid-column: 3/4;
-    grid-row: 1/2;
+  width: 100%;
+  grid-column: 3/4;
+  grid-row: 1/2;
 
-    display: flex;
-    justify-content: center;
-    gap: 5px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 }
 
 .task-options button {
-    height: 1.3em;
+  height: 1.3em;
 }
 
 #due-date {
-    grid-column: 2/3;
-    grid-row: 1/2;
+  grid-column: 2/3;
+  grid-row: 1/2;
 
-    background-color: #00000036;
-    border-radius: 1em;
+  background-color: #00000036;
+  border-radius: 1em;
 
-    font-size: 1.1em;
+  font-size: 1.1em;
 
-    padding: 10px;
-    justify-self:end;
-    align-self: center;
-    border-color: #0000009e;
-    border-style: solid;
+  padding: 10px;
+  justify-self: end;
+  align-self: center;
+  border-color: #0000009e;
+  border-style: solid;
 }
 
 .task-checklist {
-    grid-column: 1/4;
-    grid-row: 3/4;
+  grid-column: 1/4;
+  grid-row: 3/4;
 
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 #new-element {
-    width: 25%;
-    font-size: 1.1em;
+  width: 25%;
+  font-size: 1.1em;
 }
 
 #add-element-btn {
-    width: 25%;
-    font-size: 1.1em;
+  width: 25%;
+  font-size: 1.1em;
 }
 
 .delete-task {
-    width: 40px;  /* Ensure equal width and height */
-    height: 40px;
-    padding: 0; /* Remove any default padding */
-    border-radius: 50%; /* Make it a perfect circle */
-    border: none;
-    background-color: #00000032; /* Red delete color */
-    color: white;
-    font-size: 30px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  width: 40px; /* Ensure equal width and height */
+  height: 40px;
+  padding: 0; /* Remove any default padding */
+  border-radius: 50%; /* Make it a perfect circle */
+  border: none;
+  background-color: #00000032; /* Red delete color */
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-  
-.delete-task:hover {
-    background-color: #000000c0; /* Darker red on hover */
-}
-  
 
-.task-checklist-div{
-    background-color: #00000036;
-    border-radius: 1em;
-    border-color: #0000009e;
-    padding: 10px;
+.delete-task:hover {
+  background-color: #000000c0; /* Darker red on hover */
+}
+
+.task-checklist-div {
+  background-color: #00000036;
+  border-radius: 1em;
+  border-color: #0000009e;
+  padding: 10px;
 }
 
 .task-checklist-div li {
-    font-size: 1.2em;
+  font-size: 1.2em;
 }

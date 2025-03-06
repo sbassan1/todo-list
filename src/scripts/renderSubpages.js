@@ -1,72 +1,68 @@
-import {task_database} from "./task_form";
-import {format, isThisWeek, parse} from "date-fns"
-import {TaskCardUI, TaskCardController} from "./task_cards";
+import { task_database } from "./task_form";
+import { format, isThisWeek, parse } from "date-fns";
+import { TaskCardUI, TaskCardController } from "./task_cards";
 
 export class TodayPage {
+  render() {
+    const titlePage = document.getElementById("title-page");
+    titlePage.textContent = "Today";
 
-    render() {
-        const titlePage = document.getElementById('title-page');
-        titlePage.textContent = "Today";
-    
-        const tasksBox = document.getElementsByClassName('tasks-box')[0]; 
-        tasksBox.innerHTML = "";
+    const tasksBox = document.getElementsByClassName("tasks-box")[0];
+    tasksBox.innerHTML = "";
 
-        const today = format(new Date(), 'dd-MM-yyyy');
+    const today = format(new Date(), "dd-MM-yyyy");
 
-        task_database.user_tasks.forEach( (task) => {
+    task_database.user_tasks.forEach((task) => {
+      if (task.task_due_date === today) {
+        const taskCardElement = new TaskCardUI(task);
+        tasksBox.appendChild(taskCardElement.render());
+        new TaskCardController(task, taskCardElement);
+      }
+    });
 
-            if(task.task_due_date === today){
-                const taskCardElement = new TaskCardUI(task);
-                tasksBox.appendChild(taskCardElement.render());
-                new TaskCardController(task, taskCardElement);
-            }
-        });
-
-        console.log(task_database.user_tasks);
-    }
+    console.log(task_database.user_tasks);
+  }
 }
 
 export class WeekPage {
+  render() {
+    const titlePage = document.getElementById("title-page");
+    titlePage.textContent = "Weekly!";
 
-    render() {
-        const titlePage = document.getElementById('title-page');
-        titlePage.textContent = "Weekly!";
-    
-        const tasksBox = document.getElementsByClassName('tasks-box')[0]; 
-        tasksBox.innerHTML = "";
+    const tasksBox = document.getElementsByClassName("tasks-box")[0];
+    tasksBox.innerHTML = "";
 
-        task_database.user_tasks.forEach( (task) => {
+    task_database.user_tasks.forEach((task) => {
+      if (
+        isThisWeek(parse(task.task_due_date, "dd-MM-yyyy", new Date()), {
+          weekStartsOn: 1,
+        })
+      ) {
+        // The week starts in monday rather than sunday, thanks USA...
+        const taskCardElement = new TaskCardUI(task);
+        tasksBox.appendChild(taskCardElement.render());
+        new TaskCardController(task, taskCardElement);
+      }
+    });
 
-            if(isThisWeek( parse(task.task_due_date, 'dd-MM-yyyy', new Date()) , { weekStartsOn: 1 })){ // The week starts in monday rather than sunday, thanks USA...
-                const taskCardElement = new TaskCardUI(task);
-                tasksBox.appendChild(taskCardElement.render());
-                new TaskCardController(task, taskCardElement);
-            }
-        });
-
-        console.log(task_database.user_tasks);
-    }
+    console.log(task_database.user_tasks);
+  }
 }
 
 export class AllTasks {
+  render() {
+    const titlePage = document.getElementById("title-page");
+    titlePage.textContent = "ALL TASKS! WATCH OUT!!";
 
-    render() {
-        const titlePage = document.getElementById('title-page');
-        titlePage.textContent = "ALL TASKS! WATCH OUT!!";
-    
-        const tasksBox = document.getElementsByClassName('tasks-box')[0]; 
-        tasksBox.innerHTML = "";
+    const tasksBox = document.getElementsByClassName("tasks-box")[0];
+    tasksBox.innerHTML = "";
 
-        task_database.user_tasks.forEach( (task) => {
-            const taskCardElement = new TaskCardUI(task);
-            tasksBox.appendChild(taskCardElement.render());
-            new TaskCardController(task, taskCardElement);
+    task_database.user_tasks.forEach((task) => {
+      const taskCardElement = new TaskCardUI(task);
+      tasksBox.appendChild(taskCardElement.render());
+      new TaskCardController(task, taskCardElement);
+    });
 
-        });
-
-        console.log(task_database.user_tasks);
-    }
-
+    console.log(task_database.user_tasks);
+  }
 }
-
-    
