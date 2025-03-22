@@ -23,7 +23,7 @@ export class Task {
     }
 
     if (
-      task_description &&
+      !task_description &&
       (typeof task_description !== "string" || task_description.length > 50)
     ) {
       throw new Error("task_description must be less than 50 characters.");
