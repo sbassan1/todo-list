@@ -80,12 +80,12 @@
 }
 
 .delete-task {
-  width: 40px; /* Ensure equal width and height */
+  width: 40px; 
   height: 40px;
-  padding: 0; /* Remove any default padding */
-  border-radius: 50%; /* Make it a perfect circle */
+  padding: 0; 
+  border-radius: 50%;
   border: none;
-  background-color: #00000032; /* Red delete color */
+  background-color: #00000032;
   color: white;
   font-size: 30px;
   font-weight: bold;
@@ -97,7 +97,7 @@
 }
 
 .delete-task:hover {
-  background-color: #000000c0; /* Darker red on hover */
+  background-color: #000000c0;
 }
 
 .task-checklist-div {

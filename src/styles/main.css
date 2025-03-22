@@ -12,7 +12,7 @@ body {
   background-color: #f4f4f4;
 
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 6fr;
   grid-template-rows: 1fr;
 
   font-family: "Lexend", serif;
@@ -64,6 +64,27 @@ ul {
 }
 
 .sidebar ul li:hover {
+  background-color: #dfdfdf;
+}
+
+.user-projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-projects-header button{
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border-style: solid;
+  border-width: 3px;
+  text-align: center;
+  font-size: 1em;
+  font-weight: bolder;
+}
+
+.user-projects-header :hover {
   background-color: #dfdfdf;
 }
 
