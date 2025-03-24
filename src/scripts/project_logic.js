@@ -1,13 +1,20 @@
+import { Task, TaskManager } from "./task_logic.js";
 
-class Project {
+
+function getAnyClass(obj) {
+    if (typeof obj === "undefined") return "undefined";
+    if (obj === null) return "null";
+    return obj.constructor.name;
+}
+
+export class Project {
  
     static idCounter = 0;
-
     static generatedId(){
         return ++Project.idCounter;
     }
 
-    constructor(proj_name, proj_description, proj_list = [], id = null) {
+    constructor(proj_name, proj_description, id = null) {
         
         if (!proj_name || typeof proj_name !== "string" || proj_name > 20) {
             throw new Error(
@@ -18,16 +25,12 @@ class Project {
         if (proj_description && (typeof proj_description !== "string" || proj_description.length > 50)) {
             throw new Error("proj_description must be less than 50 characters.");
         }
-
-        if (proj_list && typeof proj_list !== "array") {
-            throw new Error("project project lists must be of type project!!");
-        }
      
         this.proj_name = proj_name;
         this.proj_description = proj_description;
-        this.proj_list = []; // List of proyects managed by a new instance of TaskManager on each project
         this.id = id || this.generateId();
-    
+        this.proj_tasks = new TaskManager(); // Each project has a task manager to manage the projects tasks!
+
     }
 
 }
@@ -35,9 +38,9 @@ class Project {
 /* 
     Manages instances of projects, editing their 
 */
-class ProjectManager {
+export class ProjectManager {
 
-    constructor(user_projects) {
+    constructor() {
         this.user_projects = []; // The list of users projects
     }
 
@@ -77,5 +80,23 @@ class ProjectManager {
         this.user_projects[index].proj_description = newDescription;
         console.log("project description changed!");
 
+    }
+
+    addProyect(project){
+
+        if( getAnyClass(project) !== "Project") {
+            console.error("The element must be an object of the class Project!");
+            return;
+        }
+        this.user_projects.push(project);
+    }
+
+    deleteProyect(projectId) {
+        const index = this.findTaskIndexById(projectId);
+        if (index === -1) {
+          console.error("Task not found.");
+          return;
+        }
+        this.user_projects.splice(index, 1);
     }
 }
