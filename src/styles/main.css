@@ -36,6 +36,9 @@ ul {
 
   display: flex;
   flex-direction: column;
+
+  position: relative;
+
   gap: 30px;
 }
 
@@ -86,6 +89,14 @@ ul {
 
 .user-projects-header :hover {
   background-color: #dfdfdf;
+}
+
+#credits {
+  position:absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 5px;
 }
 
 /* Content Side Stiling Base */
