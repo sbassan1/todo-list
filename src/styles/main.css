@@ -95,8 +95,16 @@ ul {
   background-color: white;
   margin: 15px;
 
+  opacity: 1;
+  transition: opacity 0.17s ease-in-out;
+
   padding: 3em;
   box-shadow: -1px 0px 5px rgba(0, 0, 0, 0.352);
+}
+
+.main-content.fade {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .header-content {
